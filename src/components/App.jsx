@@ -89,13 +89,17 @@ class App extends Component {
 
   modalHandler = (id) => {
     const imgId = this.state.response.find(elem => elem.id === id)
-    this.setState({modalValue: imgId})
+    this.setState({ modalValue: imgId })
+    this.modalOpen()
   }
 
-  modalFunc = (id) => {
-    this.modalHandler(id)
-    this.setState(prevState => ({showModal: !prevState.showModal}))
-  }
+  modalOpen = () => {
+    this.setState({ showModal: true })
+  };
+
+  modalClose = () => {
+    this.setState({ showModal: false })
+  };
 
 
 
@@ -109,12 +113,12 @@ class App extends Component {
     return (
       <div>
         {showModal && (
-          <Modal value={modalValue}/>
+          <Modal value={modalValue} funcClose={this.modalClose}/>
         )}
         <Searchbar submit={this.searchImg} />
 
         <ImageGallery>
-          <ImageGalleryItem response={response} modal={this.modalFunc} />
+          <ImageGalleryItem response={response} modal={this.modalHandler} />
         </ImageGallery>
 
         {status === "pending" && (

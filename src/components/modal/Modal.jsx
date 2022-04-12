@@ -7,17 +7,18 @@ import styles from "./Modal.module.css";
 const modalRoot = document.querySelector("#modal__root")
 
 class Modal extends Component {
-    componentDidUpdate(prevProps, prevState) {
-        console.log("its update")
-
-        window.addEventListener("keydown", e => {
-            if (e.code === "Escape") {}
-         });
-    }
+    componentDidMount() {
+        window.addEventListener("keydown", this.handleKeyDown);
+    };
 
     componentWillUnmount() {
-        console.log("its unmount")
-    }
+        window.removeEventListener("keydown", this.handleKeyDown);
+    };
+
+    // ? func
+    handleKeyDown = (e) => {
+        if (e.code === "Escape") { this.props.funcClose() }
+    };
 
     render() {
         const { id, big } = this.props.value;
