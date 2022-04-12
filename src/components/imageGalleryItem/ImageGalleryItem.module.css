@@ -1,0 +1,23 @@
+.gallery__card {
+    margin-bottom: 20px;
+    width: calc(25% - 15px);
+    border-radius: 5px;
+}
+
+.gallery__card:not(:nth-child(4n)) {
+    margin-right: 20px;
+}
+
+.gallery__link {
+    cursor: pointer;
+    height: 290px;
+    width: 350px;
+}
+
+.gallery__img {
+    display: block;
+    width: 100%;
+    height: 240px;
+    border-radius: 5px;
+}
+

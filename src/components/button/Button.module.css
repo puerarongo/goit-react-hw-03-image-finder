@@ -1,0 +1,14 @@
+.load__more {
+    padding: 12px;
+    color: #fff;
+    background-color: brown;
+    border: 1px solid var(--button-border-color);
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-bottom: 40px;
+}
+
+.load__more:hover {
+    background-color: rgb(199, 8, 8);
+}

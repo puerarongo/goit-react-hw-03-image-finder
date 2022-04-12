@@ -1,0 +1,31 @@
+.header {
+    height: 60px;
+    padding-top: 25px;
+    background: #1745da;
+}
+
+.form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form__input {
+    padding: 8px;
+    width: 250px;
+    border-right: 0;
+    border-radius: 0 5px 5px 0;
+}
+
+.button {
+    padding: 8px;
+    color: #fff;
+    background-color: brown;
+    border: 1px solid var(--button-border-color);
+    cursor: pointer;
+    border-radius: 5px 0 0 5px;
+}
+
+.button:hover {
+    background-color: rgb(199, 8, 8);
+}
