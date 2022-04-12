@@ -4,6 +4,7 @@ import ImageGallery from "./imageGallery/ImageGallery";
 import ImageGalleryItem from "./imageGalleryItem/ImageGalleryItem";
 import Loader from "./loader/Loader";
 import Button from "./button/Button";
+import Modal from "./modal/Modal";
 
 
 class App extends Component { 
@@ -12,7 +13,9 @@ class App extends Component {
     value: null,
     page: 0,
     error: null,
-    status: "idle"
+    status: "idle",
+    showModal: false,
+    modalValue: []
   };
 
   // ? func
@@ -69,7 +72,7 @@ class App extends Component {
       this.setState(prevS => { return { page: prevS.page + 1 } })
     }
   }  
-
+  
 
   searchImg = (value) => {
     
@@ -84,23 +87,35 @@ class App extends Component {
     });
   };
 
+  modalHandler = (id) => {
+    const imgId = this.state.response.find(elem => elem.id === id)
+    this.setState({modalValue: imgId})
+  }
+
+  modalFunc = (id) => {
+    this.modalHandler(id)
+    this.setState(prevState => ({showModal: !prevState.showModal}))
+  }
+
+
 
 
 
 
   // ? func
   render() {
-    const { response, page, status } = this.state;
+    const { response, page, status, showModal, modalValue } = this.state;
 
     return (
       <div>
+        {showModal && (
+          <Modal value={modalValue}/>
+        )}
         <Searchbar submit={this.searchImg} />
 
-        {status === "resolved" && (
-          <ImageGallery>
-            <ImageGalleryItem response={response} />
-          </ImageGallery>
-        )}
+        <ImageGallery>
+          <ImageGalleryItem response={response} modal={this.modalFunc} />
+        </ImageGallery>
 
         {status === "pending" && (
           <Loader />

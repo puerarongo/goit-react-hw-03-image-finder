@@ -2,17 +2,14 @@
     margin-bottom: 20px;
     width: calc(25% - 15px);
     border-radius: 5px;
+    cursor: pointer;
+    height: 290px;
 }
 
 .gallery__card:not(:nth-child(4n)) {
     margin-right: 20px;
 }
 
-.gallery__link {
-    cursor: pointer;
-    height: 290px;
-    width: 350px;
-}
 
 .gallery__img {
     display: block;
