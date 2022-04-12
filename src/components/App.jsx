@@ -69,7 +69,7 @@ class App extends Component {
       this.setState(prevS => { return { page: prevS.page + 1 } })
     }
   }  
-  
+
 
   searchImg = (value) => {
     
@@ -90,7 +90,7 @@ class App extends Component {
 
   // ? func
   render() {
-    const { response, value, page, status } = this.state;
+    const { response, page, status } = this.state;
 
     return (
       <div>
