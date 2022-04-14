@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import styles from "./Searchbar.module.css";
 
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
 class Searchbar extends Component {
     state = {
         text: "",
@@ -18,8 +20,8 @@ class Searchbar extends Component {
 
     submitHandler = (e) => {
         e.preventDefault();
-        if (this.state.text === "") {
-            return alert("!!!!")
+        if (this.state.text.trim() === "") {
+            return Notify.warning("Please, enter the word into the search engine");
         }
 
         this.props.submit(this.state.text);

@@ -20,11 +20,18 @@ class Modal extends Component {
         if (e.code === "Escape") { this.props.funcClose() }
     };
 
+
+
+    handlerClick = (e) => {
+        if (e.currentTarget === e.target) { this.props.funcClose() }
+    };
+
+
     render() {
         const { id, big } = this.props.value;
 
         return createPortal(
-            <div className={styles.overlay}>
+            <div className={styles.overlay} onClick={this.handlerClick}>
                 <div className={styles.modal}>
                     <img className={styles.img} src={big} alt={id} />
                 </div>

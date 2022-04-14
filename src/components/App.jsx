@@ -116,7 +116,7 @@ class App extends Component {
           <Modal value={modalValue} funcClose={this.modalClose}/>
         )}
         <Searchbar submit={this.searchImg} />
-
+        
         <ImageGallery>
           <ImageGalleryItem response={response} modal={this.modalHandler} />
         </ImageGallery>
@@ -125,7 +125,7 @@ class App extends Component {
           <Loader />
         )}
 
-        {page >= 1 && (
+        {response.length > 0 && (
           <Button pressMore={this.fetchFunc}/>
         )}
       </div>
