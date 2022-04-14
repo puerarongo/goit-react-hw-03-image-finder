@@ -108,7 +108,7 @@ class App extends Component {
 
   // ? func
   render() {
-    const { response, page, status, showModal, modalValue } = this.state;
+    const { response, status, showModal, modalValue } = this.state;
 
     return (
       <div>
