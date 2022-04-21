@@ -45,11 +45,10 @@ class App extends Component {
   };
 
 
-
   requestHandler =  () => {
     const { value, page } = this.state;
 
-    this.setState({status: "pending"});
+    this.setState({ status: "pending" });
 
     fetchFunc(value, page).then(pictures => this.createArr(pictures)).catch(error => {
       console.log(error)
@@ -60,7 +59,6 @@ class App extends Component {
   
 
   searchImg = (value) => {
-    
     this.setState(prevState => {
       if (prevState.value !== value) {
         return {
@@ -68,6 +66,7 @@ class App extends Component {
           value: value
         }
       }
+
       return { value: value }
     });
   };
@@ -85,10 +84,6 @@ class App extends Component {
   modalClose = () => {
     this.setState({ showModal: false })
   };
-
-
-
-
 
 
   // ? func

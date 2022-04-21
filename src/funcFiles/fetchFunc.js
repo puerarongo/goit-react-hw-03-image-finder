@@ -13,5 +13,4 @@ const fetchFunc = async (name, page) => {
     return responseImg;
 }
 
-
 export default fetchFunc;

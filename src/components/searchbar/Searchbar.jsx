@@ -4,12 +4,7 @@ import styles from "./Searchbar.module.css";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 class Searchbar extends Component {
-    state = {
-        text: "",
-    };
-
-
-    reset = () => { this.setState({ text: "" }) };
+    state = { text: "" };
 
 
     inputHandler = (e) => {
@@ -23,9 +18,8 @@ class Searchbar extends Component {
         if (this.state.text.trim() === "") {
             return Notify.warning("Please, enter the word into the search engine");
         }
-
         this.props.submit(this.state.text);
-        this.reset();
+        this.setState({ text: "" });
     };
 
 
