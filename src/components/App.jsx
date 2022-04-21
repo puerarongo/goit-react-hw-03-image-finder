@@ -6,6 +6,8 @@ import Loader from "./loader/Loader";
 import Button from "./button/Button";
 import Modal from "./modal/Modal";
 
+import fetchFunc from "funcFiles/fetchFunc";
+
 
 class App extends Component { 
   state = {
@@ -19,6 +21,15 @@ class App extends Component {
   };
 
   // ? func
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.value !== this.state.value) {
+      this.setState({response: []});
+      this.requestHandler();
+    }
+    else {
+      return
+    }
+  };
 
   createArr = (value) => {
     const newArr = value.hits.map(elem => {
@@ -33,44 +44,18 @@ class App extends Component {
     })
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.value !== this.state.value) {
-      this.setState({response: []});
-      this.fetchFunc();
-    }
-    else {
-      return
-    }
-  };
 
-  fetchFunc = async () => {
+
+  requestHandler =  () => {
     const { value, page } = this.state;
-    const BASE_CASE = "https://pixabay.com/api/?";
-    const API_KEY = "26654648-b583e9a090522ce0710c170d0";
 
     this.setState({status: "pending"});
 
-    try {
-      const requestImg = await fetch(`${BASE_CASE}key=${API_KEY}&q=${value}&page=${page}
-      &image_type=photo&orientation=horizontal&per_page=12`);
-
-      if (!requestImg.ok) {
-        throw new Error("Error!!!")
-      }
-
-      const responseImg = await requestImg.json();
-      this.createArr(responseImg);
-    }
-    catch (error) {
+    fetchFunc(value, page).then(pictures => this.createArr(pictures)).catch(error => {
       console.log(error)
-      this.setState({
-        error: error,
-        status: "rejected"
-      })
-    }
-    finally {
-      this.setState(prevS => { return { page: prevS.page + 1 } })
-    }
+      this.setState({status: "rejected"});
+    })
+      .finally(() => this.setState(prevS => { return { page: prevS.page + 1 } }))
   }  
   
 
@@ -126,7 +111,7 @@ class App extends Component {
         )}
 
         {response.length > 0 && (
-          <Button pressMore={this.fetchFunc}/>
+          <Button pressMore={this.requestHandler}/>
         )}
       </div>
     )
