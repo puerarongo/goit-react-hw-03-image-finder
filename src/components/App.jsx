@@ -8,7 +8,6 @@ import Modal from "./modal/Modal";
 
 import fetchFunc from "funcFiles/fetchFunc";
 
-
 class App extends Component { 
   state = {
     response: [],

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
 // ? import PORTAL
 import {createPortal} from 'react-dom';
 import styles from "./Modal.module.css";
@@ -20,8 +21,6 @@ class Modal extends Component {
         if (e.code === "Escape") { this.props.funcClose() }
     };
 
-
-
     handlerClick = (e) => {
         if (e.currentTarget === e.target) { this.props.funcClose() }
     };
@@ -39,6 +38,11 @@ class Modal extends Component {
             modalRoot
         );
     };
+};
+
+Modal.propTypes = {
+    value: PropTypes.object.isRequired,
+    funcClose: PropTypes.func.isRequired
 };
 
 export default Modal;

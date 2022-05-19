@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import styles from "./ImageGallery.module.css";
 
 const ImageGallery = ({children}) => {
@@ -7,6 +8,10 @@ const ImageGallery = ({children}) => {
             {children}
         </ul>
     );
+};
+
+ImageGallery.propTypes = {
+    children: PropTypes.element
 };
 
 export default ImageGallery;

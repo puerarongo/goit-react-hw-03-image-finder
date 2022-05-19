@@ -1,11 +1,11 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
 import styles from "./Searchbar.module.css";
 
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 class Searchbar extends Component {
     state = { text: "" };
-
 
     inputHandler = (e) => {
         const { value } = e.currentTarget
@@ -45,6 +45,10 @@ class Searchbar extends Component {
         </header>
         );
     };
+};
+
+Searchbar.propTypes = {
+    submit: PropTypes.func.isRequired
 };
 
 export default Searchbar;
