@@ -22,8 +22,11 @@ class App extends Component {
 
   // ? func
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.value !== this.state.value) {
-      this.setState({ response: [] });
+    if (
+      prevState.value !== this.state.value ||
+      prevState.page !== this.state.page
+    ) {
+      //this.setState({ response: [] });
       this.requestHandler();
     } else {
       return;
@@ -69,12 +72,7 @@ class App extends Component {
       .catch(error => {
         console.log(error);
         this.setState({ status: 'rejected' });
-      })
-      .finally(() =>
-        this.setState(prevS => {
-          return { page: prevS.page + 1 };
-        })
-      );
+      });
   };
 
   searchImg = value => {
@@ -83,11 +81,16 @@ class App extends Component {
         return {
           page: 1,
           value: value,
+          response: [],
         };
       }
 
       return { value: value };
     });
+  };
+
+  loadMore = () => {
+    this.setState(prevState => ({ page: prevState.page + 1 }));
   };
 
   modalHandler = id => {
@@ -119,7 +122,7 @@ class App extends Component {
 
         {status === 'pending' && <Loader />}
 
-        {status === 'resolved' && <Button pressMore={this.requestHandler} />}
+        {status === 'resolved' && <Button pressMore={this.loadMore} />}
       </div>
     );
   }
