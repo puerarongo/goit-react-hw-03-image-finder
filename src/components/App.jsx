@@ -7,6 +7,7 @@ import Button from './button/Button';
 import Modal from './modal/Modal';
 
 import fetchFunc from 'funcFiles/fetchFunc';
+import { Report } from 'notiflix/build/notiflix-report-aio';
 
 class App extends Component {
   state = {
@@ -48,7 +49,23 @@ class App extends Component {
     this.setState({ status: 'pending' });
 
     fetchFunc(value, page)
-      .then(pictures => this.createArr(pictures))
+      .then(pictures => {
+        if (pictures.total === 0) {
+          Report.failure('Error', 'This images does not exist', 'OK');
+          return this.setState({ status: 'rejected' });
+        }
+
+        this.createArr(pictures);
+
+        if (pictures.hits.length < 12) {
+          Report.warning(
+            'Warning',
+            "We're sorry, but you've reached the end of search results.",
+            'OK'
+          );
+          this.setState({ status: 'rejected' });
+        }
+      })
       .catch(error => {
         console.log(error);
         this.setState({ status: 'rejected' });
@@ -102,7 +119,7 @@ class App extends Component {
 
         {status === 'pending' && <Loader />}
 
-        {response.length > 0 && <Button pressMore={this.requestHandler} />}
+        {status === 'resolved' && <Button pressMore={this.requestHandler} />}
       </div>
     );
   }

@@ -18,7 +18,7 @@ class Searchbar extends Component {
       return Notify.warning('Please, enter the word into the search engine');
     }
     this.props.submit(this.state.text);
-    this.setState({ text: '' });
+    //this.setState({ text: '' });
   };
 
   render() {
