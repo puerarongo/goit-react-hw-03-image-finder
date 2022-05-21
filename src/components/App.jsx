@@ -116,9 +116,7 @@ class App extends Component {
         {showModal && <Modal value={modalValue} funcClose={this.modalClose} />}
         <Searchbar submit={this.searchImg} />
 
-        <ImageGallery>
-          <ImageGalleryItem response={response} modal={this.modalHandler} />
-        </ImageGallery>
+        <ImageGallery response={response} modal={this.modalHandler} />
 
         {status === 'pending' && <Loader />}
 
